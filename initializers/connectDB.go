@@ -17,13 +17,6 @@ func ConnectDatabase() {
 		log.Fatalf("Error opening database connection: %v", err)
 	}
 
-	err = DB.Ping()
-	if err != nil {
-		log.Fatal("Failed to ping the database: ", err)
-	}
-
-	defer DB.Close()
-
 	fmt.Println("Connect Database Succesful!")
 
 }

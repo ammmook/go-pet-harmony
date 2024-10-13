@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลงทะเบียนสัตว์เลี้ยง - Pet Harmony</title>
+</head>
+<body>
+    <div class="container">
+        <h2>ลงทะเบียนสัตว์เลี้ยง</h2>
+        <form action="" method="post">
+            <div>
+                <label for="pet_name">ชื่อสัตว์เลี้ยง:</label>
+                <input type="text" name="pet_name" maxlength="50" required>
+            </div>
+
+            <div>
+                <label for="breed">ประเภทสัตว์เลี้ยง:</label>
+                <select name="breed">
+                    <option value="หมา">หมา</option>
+                    <option value="แมว">แมว</option>
+                    <option value="กิ้งก่า">กิ้งก่า</option>
+                    <option value="กบ">กบ</option>
+                    <option value="เต่า">เต่า</option>
+                    <option value="งู">งู</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="species">สายพันธุ์สัตว์เลี้ยง:</label>
+                <input type="text" name="species" maxlength="100" required>
+            </div>
+
+            <div>
+                <label>เพศสัตว์เลี้ยง:</label>
+                <div>
+                    <label class="radio-label">
+                        <input type="radio" name="pet_gender" value="เพศผู้" required>
+                        <span>เพศผู้</span>
+                        </label>
+                    <label class="radio-label">
+                        <input type="radio" name="pet_gender" value="เพศเมีย">
+                        <span>เพศเมีย</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="pet_gender" value="ไม่ทราบ">
+                        <span>ไม่ทราบ</span>
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label for="pet_age">อายุ:</label>
+                <input type="text" name="pet_age" placeholder="ระบุเป็นปี/เดือน" maxlength="50" required>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">ลงทะเบียน</button>&nbsp;
+                <button type="reset" class="btn btn-secondary">ยกเลิก</button>
+            </div>
+
+            <div>
+                <a href="" class="link-pets">แสดงรายชื่อสัตว์เลี้ยงของคุณ</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
