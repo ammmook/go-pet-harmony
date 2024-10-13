@@ -13,11 +13,11 @@ func init() {
 }
 
 func main() {
-	user, _ := controller.GetUsers(5)
+	user, err := controller.GetUsers("jane.smith@example.com")
 
-	if user != nil {
-		fmt.Printf("User : %v\n", user.Email)
-	} else {
-		log.Fatal("Can't get user")
+	if err != nil {
+		log.Fatalf("Error retrieving user: %v", err)
 	}
+
+	fmt.Printf("User: %s\n", user.Email)
 }
