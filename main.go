@@ -9,5 +9,5 @@ func init() {
 }
 
 func main() {
-	defer initializers.CloseDatabase()
+
 }

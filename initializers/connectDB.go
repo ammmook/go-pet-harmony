@@ -27,9 +27,3 @@ func ConnectDatabase() {
 	fmt.Println("Connect Database Succesful!")
 
 }
-
-func CloseDatabase() {
-	if err := DB.Close(); err != nil {
-		log.Fatalf("Error closing the database connection: %v", err)
-	}
-}
