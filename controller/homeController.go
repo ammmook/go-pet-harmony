@@ -6,7 +6,7 @@ import (
 )
 
 func GetUsers(userId int) (*model.User, error) {
-	query := "SELECT * FROM users WHERE id = ?"
+	query := "SELECT * FROM users WHERE id=?"
 	result := initializers.DB.QueryRow(query, userId) // Use QueryRow for single result
 
 	var user model.User
