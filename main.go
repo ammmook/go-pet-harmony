@@ -18,6 +18,6 @@ func main() {
 	if err != nil {
 		log.Fatal("Can't get user")
 	} else {
-		fmt.Printf("User : %v\n", user.Email)
+		fmt.Printf("User email : %v\n", user.Email)
 	}
 }
