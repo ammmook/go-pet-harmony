@@ -8,6 +8,7 @@ import (
 	"github.com/f1nn-ach/pj-golang/model"
 )
 
+
 func GetUsers(email string) (*model.User, error) {
 	query := "SELECT * FROM Users WHERE email = ?"
 
