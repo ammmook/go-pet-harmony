@@ -3,7 +3,7 @@ package model
 type Pet struct {
 	Id      string
 	Name    string
-	Genter  string
+	Gender  string
 	Age     string
 	Breed   string
 	Species string
