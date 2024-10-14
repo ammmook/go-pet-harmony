@@ -1,29 +1,39 @@
 package managementdb
 
 import (
-	"database/sql"
+	"encoding/json"
+	"fmt"
+	"net/http"
 
 	"github.com/f1nn-ach/pj-golang/initializers"
 	"github.com/f1nn-ach/pj-golang/model"
 )
 
-func GetUsersByEmail(email string) (*model.User, error) {
-	query := "Select * from Users where email = ?"
-	result := initializers.DB.QueryRow(query, email)
+func GetUsers(w http.ResponseWriter, r *http.Request) {
+	var users []model.User
+	if r.Method == http.MethodGet {
+		db := initializers.OpenConnection()
+		result, _ := db.Query("select * from users")
+		for result.Next() {
+			var user model.User
+			result.Scan(&user.Email, &user.Firstname, &user.Lastname, &user.Password, &user.PhoneNumber, &user.Role)
+			users = append(users, user)
+		}
+		res, _ := json.Marshal(users)
+		fmt.Fprint(w, (string(res)))
 
-	var user model.User
-	var role sql.NullString
-
-	err := result.Scan(&user.Email, &user.Firstname, &user.Lastname, &user.PhoneNumber, &user.Password, &role)
-	if err != nil {
-		return nil, err
+		defer db.Close()
 	}
+}
 
-	if role.Valid {
-		user.Role = role.String
-	} else {
-		user.Role = "default"
-	}
+func PostUsers(w http.ResponseWriter, r *http.Request) {
 
-	return &user, nil
+}
+
+func PutUsers(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func DeleteUsers(w http.ResponseWriter, r *http.Request) {
+
 }
