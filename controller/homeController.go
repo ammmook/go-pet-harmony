@@ -1,28 +1,19 @@
 package controller
 
 import (
-	"database/sql"
 	"fmt"
+	"log"
 
 	"github.com/f1nn-ach/pj-golang/initializers"
-	"github.com/f1nn-ach/pj-golang/model"
 )
 
+func CallUser() {
+	user, err := initializers.GetUsers("user")
 
-func GetUsers(email string) (*model.User, error) {
-	query := "SELECT * FROM Users WHERE email = ?"
-
-	result := initializers.DB.QueryRow(query, email)
-
-	var user model.User
-
-	err := result.Scan(&user.Email, &user.Firstname, &user.Lastname, &user.PhoneNumber, &user.Password, &user.Role)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			return nil, fmt.Errorf("no user found with email: %s", email)
-		}
-		return nil, err
+		log.Fatalf("Error retrieving user: %v", err)
 	}
 
-	return &user, nil
+	fmt.Printf("User: %s\n", user.Email)
+	fmt.Printf("Role: %s\n", user.Role)
 }
