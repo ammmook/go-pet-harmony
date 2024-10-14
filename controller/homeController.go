@@ -14,6 +14,6 @@ func CallUser() {
 		log.Fatalf("Error retrieving user: %v", err)
 	}
 
-	fmt.Printf("User: %s\n", user.Email)
+	fmt.Printf("Uses: %s\n", user.Email)
 	fmt.Printf("Role: %s\n", user.Role)
 }
