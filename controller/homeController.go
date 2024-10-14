@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/f1nn-ach/pj-golang/initializers"
+	managementdb "github.com/f1nn-ach/pj-golang/managementDB"
 )
 
 func CallUser() {
-	user, err := initializers.GetUsers("user")
+	user, err := managementdb.GetUsersByEmail("user")
 
 	if err != nil {
 		log.Fatalf("Error retrieving user: %v", err)
