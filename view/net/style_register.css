@@ -38,6 +38,14 @@ form {
     flex-direction: column;
 }
 
+.link-login {
+    text-align: center;
+}
+
+.link-login a {
+    text-decoration: none;
+}
+
 input[type="email"],
 input[type="text"],
 input[type="tel"],

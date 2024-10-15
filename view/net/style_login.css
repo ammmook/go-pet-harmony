@@ -54,6 +54,14 @@ input[type="password"]:focus {
     border-color: #4a90e2;
 }
 
+.link-regis {
+    text-align: center;
+}
+
+.link-regis a {
+    text-decoration: none;
+}
+
 .btn-login {
     background-color: #4a90e2;
     color: white;
