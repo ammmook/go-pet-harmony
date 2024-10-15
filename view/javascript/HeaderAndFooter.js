@@ -19,7 +19,7 @@ class SpecialHeader extends HTMLElement {
                     <!-- Navigation -->
                     <nav class="nav-container">
                         <ul class="main-nav">
-                            <li><a href="/Project_PetHotel/" class="nav-link"> <span class="nav-text">Home</span> <span class="nav-indicator"></span></a></li>
+                            <li><a href="/" class="nav-link"> <span class="nav-text">Home</span> <span class="nav-indicator"></span></a></li>
                             <li><a href="#service" class="nav-link"> <span class="nav-text">Service</span> <span class="nav-indicator"></span></a></li>
                             <li><a href="#about" class="nav-link"> <span class="nav-text">About</span> <span class="nav-indicator"></span></a></li>
                             <li><a href="contact" class="nav-link"> <span class="nav-text">Contact</span> <span class="nav-indicator"></span></a></li>
@@ -27,7 +27,7 @@ class SpecialHeader extends HTMLElement {
 
                         <!-- User Navigation -->
                         <div class="user-nav">
-                            <div class="user-menu" style="display: none;" id="userMenu">
+                            <div class="user-menu" id="userMenu">
                                 <a class="btn btn-user" onclick="toggleDropdown()">
                                     <img alt="User profile" src="assets/img/user.png"> <span>User</span>
                                 </a>
@@ -44,7 +44,7 @@ class SpecialHeader extends HTMLElement {
                                 </div>
                             </div>
 
-                            <div class="auth-buttons" style="display: none;" id="authButtons">
+                            <div class="auth-buttons" id="authButtons">
                                 <a href="login" class="btn btn-login"> <img src="assets/img/enter.png" alt="Login">
                                     <span>Login</span></a>
                                 <a href="register" class="btn btn-signup"> <img src="assets/img/add-user.png" alt="Sign up">
@@ -55,10 +55,50 @@ class SpecialHeader extends HTMLElement {
                 </div>
             </header>
         `;
+        this.setupUserNavigation();
+    }
+
+    setupUserNavigation() {
+        const userMenu = this.querySelector('#userMenu');
+        const authButtons = this.querySelector('#authButtons');
+        
+        // Check if user is logged in (you need to implement this logic)
+        const isLoggedIn = this.checkUserLoginStatus();
+        
+        if (isLoggedIn) {
+            userMenu.style.display = 'block';
+            authButtons.style.display = 'none';
+        } else {
+            userMenu.style.display = 'none';
+            authButtons.style.display = 'block';
+        }
+    }
+
+    checkUserLoginStatus() {
+        try {
+            const response = fetch('/check-login');
+            const data = response.json();
+
+            const userMenu = this.querySelector('#userMenu');
+            const authButtons = this.querySelector('#authButtons');
+            const userEmail = this.querySelector('#userEmail');
+
+            if (data.loggedIn) {
+                userMenu.style.display = 'block';
+                authButtons.style.display = 'none';
+                userEmail.textContent = data.email;
+            } else {
+                userMenu.style.display = 'none';
+                authButtons.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Error checking login status:', error);
+        }
+    
     }
 }
 
-class SpecialFooter extends HTMLElement {  // Corrected here
+class SpecialFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
             <footer>
