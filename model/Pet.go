@@ -1,10 +1,11 @@
 package model
 
 type Pet struct {
-	Id      string
+	Id      int
 	Name    string
 	Gender  string
 	Age     string
 	Breed   string
 	Species string
+	Email   User
 }
