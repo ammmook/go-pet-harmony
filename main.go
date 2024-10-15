@@ -23,6 +23,8 @@ func main() {
 
 	http.HandleFunc("/result", controller.GetResultPage)
 
+	http.HandleFunc("/petregister", controller.PetRegister)
+
 	fmt.Println("localhost:8000")
 	http.ListenAndServe(":8000", nil)
 }
