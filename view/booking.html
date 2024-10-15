@@ -15,13 +15,8 @@
                     <select name="pet" id="pet" required>
                         <option value="" disabled selected>-- เลือกสัตว์เลี้ยง --</option>
                         {{range .}}
-                        
-                    
-                        
                             <option value="{{.Id}}">{{.Name}} - {{.Breed}}</option>
-                            
-                    {{end}}
-                       
+                        {{end}}
                     </select>
                 </div>
                 
