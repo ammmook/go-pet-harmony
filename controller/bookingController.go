@@ -6,7 +6,11 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-  
+
+	managementdb "github.com/f1nn-ach/pj-golang/managementDB"
+	"github.com/f1nn-ach/pj-golang/model"
+)
+
 func init() {
 	gob.Register(model.Booking{})
 }

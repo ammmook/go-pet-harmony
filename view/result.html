@@ -1,18 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
-    <link rel="stylesheet" type="text/css" href="static/style_header.css">
-    <script src="js/HeaderAndFooter.js"></script>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ยินดีต้อนรับ - Pet Harmony</title>
+    <link rel="stylesheet" href="static/result_page.css?v=1.0" />
+    <link rel="stylesheet" href="static/style_header.css?v=1.0" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&family=Prompt:wght@400;500;700&display=swap"
-        rel="stylesheet">
-</head>
-<body>
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&family=Prompt:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/HeaderAndFooter.js"></script>
+  </head>
+  <body>
     {{template "header" .}}
-    <h1>Welcome, {{.User.Firstname}} {{.User.Lastname}}!</h1>
+
+    <section class="result-content">
+      <div class="container">
+        <h1>ยินดีต้อนรับ, {{.User.Firstname}} {{.User.Lastname}}!</h1>
+        <p>ขอบคุณที่ใช้บริการ Pet Harmony</p>
+        <div class="action-buttons">
+          <a href="/" class="btn btn-primary">กลับสู่หน้าหลัก</a>
+          <a href="/booking" class="btn btn-secondary">จองบริการ</a>
+        </div>
+      </div>
+    </section>
+
     <special-footer></special-footer>
-</body>
+  </body>
 </html>
