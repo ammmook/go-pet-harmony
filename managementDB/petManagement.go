@@ -99,3 +99,15 @@ func EditPets(pet model.Pet) (sql.Result, error) {
 	}
 	return result, nil
 }
+
+func DeletePet(id int) (sql.Result, error) {
+	db := initializers.OpenConnection()
+	defer db.Close()
+
+	query := `DELETE FROM Pets WHERE id=?`
+	result, err := db.Exec(query, id)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
