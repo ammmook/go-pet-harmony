@@ -41,7 +41,7 @@ func PetRegister(w http.ResponseWriter, r *http.Request) {
 		managementdb.AddPets(pet, userEmail)
 		http.Redirect(w, r, "/listpets", http.StatusSeeOther)
 	} else if r.Method == http.MethodGet {
-		renderTemplate(w, "registerpet.html", nil)
+		renderTemplate(w, "registerpet.html", &TemplateData{})
 	}
 }
 
