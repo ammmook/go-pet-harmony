@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แสดงรายชื่อสัตว์เลี้ยง - Pet Harmony</title>
 </head>
 <body>
     <div class="container">
-        {{.User.Firstname}}
+        <table class="pet-table">
+            <thead>
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>ชื่อ</th>
+                    <th>เพศ</th>
+                    <th>สายพันธุ์</th>
+                    <th>Species</th>
+                    <th>อายุ</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{renge .}}
+                    <tr>
+                        <td class="center-align"><%= i++ %></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="editmypet?id=${item.id}">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                                แก้ไขข้อมูล
+                            </a>
+                        </td>
+                    </tr>
+                {{END}}
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
