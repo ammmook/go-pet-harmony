@@ -7,7 +7,6 @@
     <title>แสดงรายชื่อสัตว์เลี้ยง - Pet Harmony</title>
 </head>
 <body>
-    {{template "header" .}}
     <div class="container">
         <table class="pet-table">
             <thead>
@@ -22,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{range .}}
+                {{range .Pets}}
                     <tr>
                         <td>
                             <a href="/editmypet?id={{.Id}}">
@@ -42,6 +41,7 @@
                     </tr>
                 {{end}}
             </tbody>
+            
         </table>
         <a href="/">กลับไปหน้าหลัก</a>&nbsp;<a href="/petregister">เพิ่มสัตว์เลี้ยง</a>
     </div>
