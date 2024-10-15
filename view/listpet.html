@@ -1,49 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>แสดงรายชื่อสัตว์เลี้ยง - Pet Harmony</title>
-</head>
-<body>
-    <div class="container">
+    <link rel="stylesheet" href="static/style_header.css?v=1.0" />
+    <link rel="stylesheet" href="static/pet_list.css?v=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&family=Prompt:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <script src="js/HeaderAndFooter.js"></script>
+  </head>
+  <body>
+    {{template "header" .}}
+
+    <section class="pet-list-content">
+      <div class="container">
+        <h2>รายชื่อสัตว์เลี้ยงของคุณ</h2>
         <table class="pet-table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>ชื่อ</th>
-                    <th>เพศ</th>
-                    <th>สายพันธุ์</th>
-                    <th>Species</th>
-                    <th>อายุ</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {{range .Pets}}
-                    <tr>
-                        <td>
-                            <a href="/editmypet?id={{.Id}}">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                            </a>
-                        </td>
-                        <td>{{.Name}}</td>
-                        <td>{{.Gender}}</td>
-                        <td>{{.Breed}}</td>
-                        <td>{{.Species}}</td>
-                        <td>{{.Age}}</td>
-                        <td>
-                            <a href="/deletepet?id={{.Id}}" onclick="return confirm('กรุณาตรวจสอบความถูกต้องให้เรียบร้อย')">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
-                        </td>
-                    </tr>
-                {{end}}
-            </tbody>
-            
+          <thead>
+            <tr>
+              <th></th>
+              <th>ชื่อ</th>
+              <th>เพศ</th>
+              <th>สายพันธุ์</th>
+              <th>Species</th>
+              <th>อายุ</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{range .Pets}}
+            <tr>
+              <td>
+                <a href="/editmypet?id={{.Id}}" class="edit-icon">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </a>
+              </td>
+              <td>{{.Name}}</td>
+              <td>{{.Gender}}</td>
+              <td>{{.Breed}}</td>
+              <td>{{.Species}}</td>
+              <td>{{.Age}}</td>
+              <td>
+                <a
+                  href="/deletepet?id={{.Id}}"
+                  class="delete-icon"
+                  onclick="return confirm('กรุณาตรวจสอบความถูกต้องให้เรียบร้อย')"
+                >
+                  <i class="fa-solid fa-trash-can"></i>
+                </a>
+              </td>
+            </tr>
+            {{end}}
+          </tbody>
         </table>
-        <a href="/">กลับไปหน้าหลัก</a>&nbsp;<a href="/petregister">เพิ่มสัตว์เลี้ยง</a>
-    </div>
-</body>
+        <div class="action-buttons">
+          <a href="/" class="btn btn-secondary">กลับไปหน้าหลัก</a>
+          <a href="/petregister" class="btn btn-primary">เพิ่มสัตว์เลี้ยง</a>
+        </div>
+      </div>
+    </section>
+
+    <special-footer></special-footer>
+  </body>
 </html>

@@ -1,99 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Harmony</title>
-    <script>
-        // Function to toggle dropdown visibility
-        function toggleDropdown(event) {
-            event.stopPropagation(); // Prevents closing the dropdown when clicking the button
-            const dropdown = document.getElementById('userDropdown');
-            dropdown.classList.toggle('show');
-        }
-
-        // Close dropdown when clicking outside
-        window.onclick = function (event) {
-            const dropdown = document.getElementById('userDropdown');
-            if (dropdown.classList.contains('show') && !event.target.closest('.user-nav')) {
-                dropdown.classList.remove('show');
-            }
-        }
-    </script>
-
-    <link rel="stylesheet" type="text/css" href="/static/style_header.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&family=Prompt:wght@400;500;700&display=swap"
-        rel="stylesheet">
-</head>
-
-<body>
-    {{define "header"}}
-    <header>
-        <div class="glass-morphism"></div>
-        <div class="header-container">
-            <!-- Logo and Title -->
-            <div class="brand">
-                <a href="/" class="logo-link">
-                    <div class="logo-container">
-                        <img src="/assets/img/logo.png" alt="Pet Harmony Logo">
-                        <div class="logo-glow"></div>
-                    </div>
-                    <h1>Pet Harmony</h1>
-                </a>
-            </div>
-
-            <!-- Navigation -->
-            <nav class="nav-container">
-                <ul class="main-nav">
-                    <li><a href="/" class="nav-link"><span class="nav-text">Home</span><span
-                                class="nav-indicator"></span></a></li>
-                    <li><a href="#service" class="nav-link"><span class="nav-text">Service</span><span
-                                class="nav-indicator"></span></a></li>
-                    <li><a href="#about" class="nav-link"><span class="nav-text">About</span><span
-                                class="nav-indicator"></span></a></li>
-                    <li><a href="/contact" class="nav-link"><span class="nav-text">Contact</span><span
-                                class="nav-indicator"></span></a></li>
-                </ul>
-                {{if .User}}
-                <!-- User Navigation -->
-                <div class="user-nav">
-                    <div class="user-menu" id="userMenu">
-                        <a class="btn btn-user" onclick="toggleDropdown(event)">
-                            <img alt="User profile" src="/assets/img/user.png">
-                            <span>
-                                {{if and .User.Firstname .User.Lastname}}
-                                {{.User.Firstname}} {{.User.Lastname}}
-                                {{else}}
-                                {{.User.Email}}
-                                {{end}}
-                            </span>
-                        </a>
-                        <div id="userDropdown" class="dropdown-menu">
-                            <a href="/yourprofile" class="menu-item"><img src="/assets/img/user.png"
-                                    alt="Profile"><span>Profile</span></a>
-                            <a href="/booking" class="menu-item"><img src="/assets/img/appointment.png"
-                                    alt="Appointment"><span>Booking</span></a>
-                            <a href="/listpets" class="menu-item"><img src="/assets/img/paws.png"
-                                    alt="Paws"><span>Pets</span></a>
-                            <a href="/logout" class="menu-item" onclick="return confirm('Do you want to logout?')"><img
-                                    src="/assets/img/power-on.png" alt="Logout"><span>Logout</span></a>
-                        </div>
-                    </div>
-                </div>
-                {{else}}
-                <div class="auth-buttons" id="authButtons">
-                    <a href="/login" class="btn btn-login"><img src="/assets/img/enter.png"
-                            alt="Login"><span>Login</span></a>
-                    <a href="/register" class="btn btn-signup"><img src="/assets/img/add-user.png"
-                            alt="Sign up"><span>Sign-up</span></a>
-                </div>
-                {{end}}
-            </nav>
+<script src="js/HeaderAndFooter.js"></script>
+{{define "header"}}
+<header>
+  <div class="glass-morphism"></div>
+  <div class="header-container">
+    <!-- Logo and Title -->
+    <div class="brand">
+      <a href="/" class="logo-link">
+        <div class="logo-container">
+          <img src="/assets/img/logo.png" alt="Pet Harmony Logo" />
+          <div class="logo-glow"></div>
         </div>
-    </header>
-    {{end}}
-</body>
+        <h1>Pet Harmony</h1>
+      </a>
+    </div>
 
-</html>
+    <!-- Navigation -->
+    <nav class="nav-container">
+      <ul class="main-nav">
+        <li>
+          <a href="/" class="nav-link"
+            ><span class="nav-text">Home</span
+            ><span class="nav-indicator"></span
+          ></a>
+        </li>
+        <li>
+          <a href="#service" class="nav-link"
+            ><span class="nav-text">Service</span
+            ><span class="nav-indicator"></span
+          ></a>
+        </li>
+        <li>
+          <a href="#about" class="nav-link"
+            ><span class="nav-text">About</span
+            ><span class="nav-indicator"></span
+          ></a>
+        </li>
+        <li>
+          <a href="/contact" class="nav-link"
+            ><span class="nav-text">Contact</span
+            ><span class="nav-indicator"></span
+          ></a>
+        </li>
+      </ul>
+      {{if .User}}
+      <!-- User Navigation -->
+      <div class="user-nav">
+        <div class="user-menu" id="userMenu">
+          <a class="btn btn-user" onclick="toggleDropdown()">
+            <img alt="User profile" src="/assets/img/user.png" />
+            <span>
+              {{if and .User.Firstname .User.Lastname}} {{.User.Firstname}}
+              {{.User.Lastname}} {{else}} {{.User.Email}} {{end}}
+            </span>
+          </a>
+          <div id="userDropdown" class="dropdown-menu">
+            <a href="/result" class="menu-item"
+              ><img src="/assets/img/user.png" alt="Profile" /><span
+                >Profile</span
+              ></a
+            >
+            <a href="/bookings" class="menu-item"
+              ><img src="/assets/img/appointment.png" alt="Appointment" /><span
+                >Booking</span
+              ></a
+            >
+            <a href="/listpets" class="menu-item"
+              ><img src="/assets/img/paws.png" alt="Paws" /><span>Pets</span></a
+            >
+            <a
+              href="/logout"
+              class="menu-item"
+              onclick="return confirm('Do you want to logout?')"
+              ><img src="/assets/img/power-on.png" alt="Logout" /><span
+                >Logout</span
+              ></a
+            >
+          </div>
+        </div>
+      </div>
+      {{else}}
+      <div class="auth-buttons" id="authButtons">
+        <a href="/login" class="btn btn-login"
+          ><img src="/assets/img/enter.png" alt="Login" /><span>Login</span></a
+        >
+        <a href="/register" class="btn btn-signup"
+          ><img src="/assets/img/add-user.png" alt="Sign up" /><span
+            >Sign-up</span
+          ></a
+        >
+      </div>
+      {{end}}
+    </nav>
+  </div>
+</header>
+{{end}}
