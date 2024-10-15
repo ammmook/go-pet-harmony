@@ -7,21 +7,20 @@ import (
 	"github.com/f1nn-ach/pj-golang/controller"
 )
 
-func GetIndex(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "view/index.html")
-}
-
 func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("view/net"))))
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("view/assets"))))
+	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("view/javascript"))))
 
 	http.HandleFunc("/getUser", controller.CallUser)
-	http.HandleFunc("/", GetIndex)
+	http.HandleFunc("/", controller.GetIndexPage)
 
 	http.HandleFunc("/login", controller.UserLogin)
 	http.HandleFunc("/register", controller.UserRegister)
 
 	http.HandleFunc("/result", controller.GetResultPage)
+
+	http.HandleFunc("/logout", controller.Logout)
 
 	fmt.Println("localhost:8000")
 	http.ListenAndServe(":8000", nil)

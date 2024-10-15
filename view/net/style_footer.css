@@ -1,0 +1,12 @@
+/* Footer */
+body {
+    font-family: 'Prompt', sans-serif;
+    line-height: 1.6;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
