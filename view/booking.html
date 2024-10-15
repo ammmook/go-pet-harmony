@@ -1,62 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class="container">
-        <h2>Pet Booking</h2>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>จองการดูแลสัตว์เลี้ยง - Pet Harmony</title>
+    <link rel="stylesheet" href="static/style_header.css?v=1.0" />
+    <link rel="stylesheet" href="static/pet_booking.css?v=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&family=Prompt:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/HeaderAndFooter.js"></script>
+  </head>
+  <body>
+    {{template "header" .}}
 
-            <form action="booking" method="post">
-                <div>
-                    <label for="pet">เลือกสัตว์เลี้ยงของคุณ</label>
-                    <select name="pet" id="pet" required>
-                        <option value="" disabled selected>-- เลือกสัตว์เลี้ยง --</option>
-                        {{range .Pets}}
-                            <option value="{{.Id}}">{{.Name}} - {{.Breed}}</option>
-                        {{end}}
-                    </select>
-                </div>
-                
-                <div>
-                    <label for="startDate">Start Date</label>
-                    <input type="date" id="startDate" name="startDate" >
-                </div>
-                
-                <div>
-                    <label for="startTime">Start Time</label>
-                    <select id="startTime" name="startTime" >
-                        <option value="" disabled selected>-- เลือกเวลา --</option>
-                        <!-- เวลาเริ่มต้นจะถูกเติมข้อมูลที่นี่ด้วย JavaScript -->
-                    </select>
-                </div>
-        
-                <div>
-                    <label for="endDate">End Date</label>
-                    <input type="date" id="endDate" name="endDate" >
-                </div>
+    <section class="booking-content">
+      <div class="container">
+        <h2>จองการดูแลสัตว์เลี้ยง</h2>
+        <form action="booking" method="post" class="booking-form">
+          <div class="form-group">
+            <label for="pet">เลือกสัตว์เลี้ยงของคุณ</label>
+            <select name="pet" id="pet" required>
+              <option value="" disabled selected>-- เลือกสัตว์เลี้ยง --</option>
+              {{range .Pets}}
+              <option value="{{.Id}}">{{.Name}} - {{.Breed}}</option>
+              {{end}}
+            </select>
+          </div>
 
-                <div>
-                    <label for="endTime">End Time</label>
-                    <select id="endTime" name="endTime" >
-                        <option value="" disabled selected>-- เลือกเวลา --</option>
-                        <!-- เวลาสิ้นสุดจะถูกเติมข้อมูลที่นี่ด้วย JavaScript -->
-                    </select>
-                </div>
-                
-                <div>
-                    <label for="requests">Requests:</label>
-                    <textarea id="requests" name="requests" rows="4" cols="50"></textarea>
-                </div>
-        
-                <div>
-                    <button type="submit">ลงทะเบียน</button>&nbsp;<button type="reset">ยกเลิก</button>
-                </div>
-            </form>
-    </div>	
+          <div class="form-group">
+            <label for="startDate">วันที่เริ่มต้น</label>
+            <input type="date" id="startDate" name="startDate" required />
+          </div>
 
-    <script src="assets/booking.js"></script> <!-- เชื่อมโยงไฟล์ JavaScript ของคุณ -->
-</body>
+          <div class="form-group">
+            <label for="startTime">เวลาเริ่มต้น</label>
+            <select id="startTime" name="startTime" required>
+              <option value="" disabled selected>-- เลือกเวลา --</option>
+              <!-- เวลาเริ่มต้นจะถูกเติมข้อมูลที่นี่ด้วย JavaScript -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="endDate">วันที่สิ้นสุด</label>
+            <input type="date" id="endDate" name="endDate" required />
+          </div>
+
+          <div class="form-group">
+            <label for="endTime">เวลาสิ้นสุด</label>
+            <select id="endTime" name="endTime" required>
+              <option value="" disabled selected>-- เลือกเวลา --</option>
+              <!-- เวลาสิ้นสุดจะถูกเติมข้อมูลที่นี่ด้วย JavaScript -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="requests">คำขอเพิ่มเติม:</label>
+            <textarea id="requests" name="requests" rows="4"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">จองบริการ</button>
+            <button type="reset" class="btn btn-secondary">ยกเลิก</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <special-footer></special-footer>
+
+    <script src="assets/booking.js"></script>
+  </body>
 </html>

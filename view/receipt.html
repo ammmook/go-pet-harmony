@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="receipt">
-        <div class="header">
-            <img src="/api/placeholder/150/100" alt="Pet Harmony Logo" class="logo">
-            <h1>ใบเสร็จการจอง</h1>
-        </div>
-        
-        <div class="booking-details">
-            <div class="booking-item">
-                <span>เลขที่การจอง:</span>
-                <span>{{.Booking.Id}}</span>
-            </div>
-            <div class="booking-item">
-                <span>วันที่เริ่มต้น:</span>
-                <span>{{.Booking.StartDate}}</span>
-            </div>
-            <div class="booking-item">
-                <span>วันที่สิ้นสุด:</span>
-                <span>{{.Booking.EndDate}}</span>
-            </div>
-            <div class="booking-item">
-                <span>คำขอพิเศษ:</span>
-                <span>{{.Booking.Request}}</span>
-            </div>
-        </div>
-        
+      <div class="booking-details">
         <div class="booking-item">
-            <span>จำนวนวัน:</span>
-            <span>{{.DayCount}} วัน</span>
+          <span>เลขที่การจอง:</span>
+          <span>{{.Booking.Id}}</span>
         </div>
-        
-        <div class="footer">
-            <p>ขอบคุณที่ใช้บริการ Pet Harmony</p>
-            <p>หากมีข้อสงสัยกรุณาติดต่อ: support@petharmony.com | โทร: 02-123-4567</p>
+        <div class="booking-item">
+          <span>วันที่เริ่มต้น:</span>
+          <span>{{.Booking.StartDate}}</span>
         </div>
-    </div>
-</body>
+        <div class="booking-item">
+          <span>วันที่สิ้นสุด:</span>
+          <span>{{.Booking.EndDate}}</span>
+        </div>
+        <div class="booking-item">
+          <span>คำขอพิเศษ:</span>
+          <span>{{.Booking.Request}}</span>
+        </div>
+      </div>
 
+      <div class="booking-item">
+        <span>จำนวนวัน:</span>
+        <span>{{.DayCount}} วัน</span>
+      </div>
+
+      <div class="footer">
+        <p>ขอบคุณที่ใช้บริการ Pet Harmony</p>
+        <p>
+          หากมีข้อสงสัยกรุณาติดต่อ: support@petharmony.com | โทร: 02-123-4567
+        </p>
+      </div>
+    </div>
+  </body>
 </html>
