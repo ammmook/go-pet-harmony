@@ -14,9 +14,14 @@
                     <label for="pet">เลือกสัตว์เลี้ยงของคุณ</label>
                     <select name="pet" id="pet" required>
                         <option value="" disabled selected>-- เลือกสัตว์เลี้ยง --</option>
-                        <c:forEach items="${petList}" var="pet">
-                            <option value="${pet.id}">${pet.name} - ${pet.breed}</option>
-                        </c:forEach>
+                        {{range .}}
+                        
+                    
+                        
+                            <option value="{{.Id}}">{{.Name}} - {{.Breed}}</option>
+                            
+                    {{end}}
+                       
                     </select>
                 </div>
                 
