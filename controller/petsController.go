@@ -8,26 +8,6 @@ import (
 	"github.com/f1nn-ach/pj-golang/model"
 )
 
-func PetRegister(w http.ResponseWriter, r *http.Request) {
-	if r.Method == http.MethodPost {
-		session, _ := store.Get(r, "session-name")
-		userEmail := session.Values["user"]
-
-		pet := model.Pet{
-			Name:    r.FormValue("pet_name"),
-			Gender:  r.FormValue("pet_gender"),
-			Age:     r.FormValue("pet_age"),
-			Breed:   r.FormValue("breed"),
-			Species: r.FormValue("species"),
-		}
-		managementdb.AddPets(pet, userEmail.(string))
-
-		http.Redirect(w, r, "/listpets", http.StatusSeeOther)
-	} else if r.Method == http.MethodGet {
-		http.ServeFile(w, r, "view/registerpet.html")
-	}
-}
-
 func LoadListPetPage(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		session, _ := store.Get(r, "session-name")
@@ -39,6 +19,25 @@ func LoadListPetPage(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		renderTemplate(w, "listpet.html", pets)
+	}
+}
+
+func PetRegister(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		session, _ := store.Get(r, "session-name")
+		userEmail := session.Values["user"].(string)
+
+		pet := model.Pet{
+			Name:    r.FormValue("pet_name"),
+			Gender:  r.FormValue("pet_gender"),
+			Age:     r.FormValue("pet_age"),
+			Breed:   r.FormValue("breed"),
+			Species: r.FormValue("species"),
+		}
+		managementdb.AddPets(pet, userEmail)
+		http.Redirect(w, r, "/listpets", http.StatusSeeOther)
+	} else if r.Method == http.MethodGet {
+		renderTemplate(w, "registerpet.html", nil)
 	}
 }
 
@@ -58,7 +57,6 @@ func EditPet(w http.ResponseWriter, r *http.Request) {
 			Species: r.FormValue("species"),
 		}
 		managementdb.EditPets(pet)
-
 		http.Redirect(w, r, "/listpets", http.StatusSeeOther)
 	} else if r.Method == http.MethodGet {
 		id, err := strconv.Atoi(r.FormValue("id"))
@@ -73,4 +71,14 @@ func EditPet(w http.ResponseWriter, r *http.Request) {
 		}
 		renderTemplate(w, "editpet.html", pet)
 	}
+}
+
+func DeletePet(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(r.FormValue("id"))
+	if err != nil {
+		http.Error(w, "Invalid pet id", http.StatusBadRequest)
+		return
+	}
+	managementdb.DeletePet(id)
+	http.Redirect(w, r, "/listpets", http.StatusSeeOther)
 }

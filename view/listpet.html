@@ -17,29 +17,32 @@
                     <th>สายพันธุ์</th>
                     <th>Species</th>
                     <th>อายุ</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {{range .}}
                     <tr>
-                        <td></td>
+                        <td>
+                            <a href="/editmypet?id={{.Id}}">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </a>
+                        </td>
                         <td>{{.Name}}</td>
                         <td>{{.Gender}}</td>
                         <td>{{.Breed}}</td>
                         <td>{{.Species}}</td>
                         <td>{{.Age}}</td>
                         <td>
-                            <a href="editmypet?id={{.Id}}">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                                แก้ไขข้อมูล
+                            <a href="/deletepet?id={{.Id}}" onclick="return confirm('กรุณาตรวจสอบความถูกต้องให้เรียบร้อย')">
+                                <i class="fa-solid fa-trash-can"></i>
                             </a>
                         </td>
                     </tr>
                 {{end}}
             </tbody>
         </table>
-        <a href="/">กลับไปหน้าหลัก</a>
+        <a href="/">กลับไปหน้าหลัก</a>&nbsp;<a href="/petregister">เพิ่มสัตว์เลี้ยง</a>
     </div>
 </body>
 </html>

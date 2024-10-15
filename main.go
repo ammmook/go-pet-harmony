@@ -25,6 +25,7 @@ func main() {
 	http.HandleFunc("/petregister", controller.PetRegister)
 	http.HandleFunc("/listpets", controller.LoadListPetPage)
 	http.HandleFunc("/editmypet", controller.EditPet)
+	http.HandleFunc("/deletepet", controller.DeletePet)
 
 	fmt.Println("localhost:8000")
 	http.ListenAndServe(":8000", nil)
