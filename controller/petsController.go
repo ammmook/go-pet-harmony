@@ -2,6 +2,7 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
 
 	managementdb "github.com/f1nn-ach/pj-golang/managementDB"
 	"github.com/f1nn-ach/pj-golang/model"
@@ -38,5 +39,38 @@ func LoadListPetPage(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		renderTemplate(w, "listpet.html", pets)
+	}
+}
+
+func EditPet(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		id, err := strconv.Atoi(r.FormValue("Id"))
+		if err != nil {
+			http.Error(w, "Invalid pet id", http.StatusBadRequest)
+			return
+		}
+		pet := model.Pet{
+			Id:      id,
+			Name:    r.FormValue("pet_name"),
+			Gender:  r.FormValue("pet_gender"),
+			Age:     r.FormValue("pet_age"),
+			Breed:   r.FormValue("breed"),
+			Species: r.FormValue("species"),
+		}
+		managementdb.EditPets(pet)
+
+		http.Redirect(w, r, "/listpets", http.StatusSeeOther)
+	} else if r.Method == http.MethodGet {
+		id, err := strconv.Atoi(r.FormValue("id"))
+		if err != nil {
+			http.Error(w, "Invalid pet id", http.StatusBadRequest)
+			return
+		}
+		pet, err := managementdb.GetPetById(id)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		renderTemplate(w, "editpet.html", pet)
 	}
 }
