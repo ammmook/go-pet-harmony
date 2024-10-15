@@ -47,7 +47,18 @@ func PetRegister(w http.ResponseWriter, r *http.Request) {
 		managementdb.AddPets(pet, userEmail)
 		http.Redirect(w, r, "/listpets", http.StatusSeeOther)
 	} else if r.Method == http.MethodGet {
-		renderTemplate(w, "registerpet.html", &TemplateData{})
+		session, _ := store.Get(r, "session-name")
+		userEmail, _ := session.Values["user"].(string)
+
+		user, err1 := managementdb.GetUserByEmail(userEmail)
+		if err1 != nil {
+			http.Error(w, err1.Error(), http.StatusInternalServerError)
+			return
+		}
+		data := &TemplateData{
+			User: user,
+		}
+		renderTemplate(w, "registerpet.html", data)
 	}
 }
 
