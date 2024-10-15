@@ -56,6 +56,11 @@ func BookingRegister(w http.ResponseWriter, r *http.Request) {
 	} else if r.Method == http.MethodGet {
 		session, _ := store.Get(r, "session-name")
 		userEmail := session.Values["user"].(string)
+		user, err1 := managementdb.GetUserByEmail(userEmail)
+		if err1 != nil {
+			http.Error(w, err1.Error(), http.StatusInternalServerError)
+			return
+		}
 
 		pets, err := managementdb.GetPetsByEmail(userEmail)
 		if err != nil {
@@ -63,6 +68,7 @@ func BookingRegister(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		data := &TemplateData{
+			User: user,
 			Pets: pets,
 		}
 		renderTemplate(w, "booking.html", data)
