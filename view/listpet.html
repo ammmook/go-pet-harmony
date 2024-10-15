@@ -21,22 +21,22 @@
                 </tr>
             </thead>
             <tbody>
-                {{renge .}}
+                {{range .}}
                     <tr>
-                        <td class="center-align"><%= i++ %></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{.Name}}</td>
+                        <td>{{.Gender}}</td>
+                        <td>{{.Breed}}</td>
+                        <td>{{.Species}}</td>
+                        <td>{{.Age}}</td>
                         <td>
-                            <a href="editmypet?id=${item.id}">
+                            <a href="editmypet?id={{.Id}}">
                                 <i class="fa-regular fa-pen-to-square"></i>
                                 แก้ไขข้อมูล
                             </a>
                         </td>
                     </tr>
-                {{END}}
+                {{end}}
             </tbody>
         </table>
     </div>

@@ -21,7 +21,9 @@ func main() {
 	http.HandleFunc("/result", controller.GetResultPage)
 
 	http.HandleFunc("/logout", controller.Logout)
+
 	http.HandleFunc("/petregister", controller.PetRegister)
+	http.HandleFunc("/listpets", controller.LoadListPetPage)
 
 	fmt.Println("localhost:8000")
 	http.ListenAndServe(":8000", nil)

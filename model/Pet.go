@@ -7,5 +7,4 @@ type Pet struct {
 	Age     string
 	Breed   string
 	Species string
-	Booking []Booking
 }

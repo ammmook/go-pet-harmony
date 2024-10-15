@@ -7,6 +7,4 @@ type User struct {
 	PhoneNumber string
 	Password    string
 	Role        string
-	Pet         []Pet
-	Booking     []Booking
 }
