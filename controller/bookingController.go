@@ -1,7 +1,10 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
+	"strconv"
+	"time"
 
 	managementdb "github.com/f1nn-ach/pj-golang/managementDB"
 	"github.com/f1nn-ach/pj-golang/model"
@@ -9,18 +12,40 @@ import (
 
 func BookingRegister(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
-		session, _ := store.Get(r, "session-name")
-		userEmail := session.Values["user"].(string)
-
-		pets, err := managementdb.GetPetsByEmail(userEmail)
+		pet_id, err := strconv.Atoi(r.FormValue("pet"))
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			http.Error(w, "Invalid pet id", http.StatusBadRequest)
 			return
 		}
+		startdate := r.FormValue("startDate")
+		starttime := r.FormValue("startTime")
+		enddate := r.FormValue("endDate")
+		endtime := r.FormValue("endTime")
+
+		startDateTimeStr := fmt.Sprintf("%s %s", startdate, starttime)
+		endDateTimeStr := fmt.Sprintf("%s %s", enddate, endtime)
 
 		booking := model.Booking{
-			StartDate: r.FormValue("startDate"),
+			StartDate: startDateTimeStr,
+			EndDate:   endDateTimeStr,
+			Request:   r.FormValue("requests"),
 		}
+		_, err_regis := managementdb.AddBooking(booking, pet_id)
+		if err_regis != nil {
+			http.Error(w, err_regis.Error(), http.StatusBadRequest)
+			return
+		}
+		startDateTime, _ := time.Parse("2006-01-02 15:04", startDateTimeStr)
+		endDateTime, _ := time.Parse("2006-01-02 15:04", endDateTimeStr)
+		duration := endDateTime.Sub(startDateTime)
+		dayCount := int(duration.Hours()/24) + 1
+
+		session, _ := store.Get(r, "session-name")
+		session.Values["booking"] = booking
+		session.Values["dayCount"] = dayCount
+		session.Save(r, w)
+
+		http.Redirect(w, r, "/receipt", http.StatusSeeOther)
 
 	} else if r.Method == http.MethodGet {
 		session, _ := store.Get(r, "session-name")
@@ -36,4 +61,26 @@ func BookingRegister(w http.ResponseWriter, r *http.Request) {
 		}
 		renderTemplate(w, "booking.html", data)
 	}
+}
+
+func BookingDetails(w http.ResponseWriter, r *http.Request) {
+	session, _ := store.Get(r, "session-name")
+
+	booking, ok := session.Values["booking"].(model.Booking)
+	if !ok {
+		http.Error(w, "No booking information found", http.StatusBadRequest)
+		return
+	}
+
+	dayCount, _ := session.Values["dayCount"].(int)
+	data := &TemplateData{
+		Booking:  &booking,
+		DayCount: dayCount,
+	}
+
+	delete(session.Values, "booking")
+	delete(session.Values, "dayCount")
+	session.Save(r, w)
+
+	renderTemplate(w, "receipt.html", data)
 }

@@ -14,7 +14,7 @@
                     <label for="pet">เลือกสัตว์เลี้ยงของคุณ</label>
                     <select name="pet" id="pet" required>
                         <option value="" disabled selected>-- เลือกสัตว์เลี้ยง --</option>
-                        {{range .}}
+                        {{range .Pets}}
                             <option value="{{.Id}}">{{.Name}} - {{.Breed}}</option>
                         {{end}}
                     </select>

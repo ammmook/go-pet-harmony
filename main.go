@@ -24,6 +24,8 @@ func main() {
 	http.HandleFunc("/editmypet", controller.EditPet)
 	http.HandleFunc("/deletepet", controller.DeletePet)
 
+	http.HandleFunc("/booking", controller.BookingRegister)
+	http.HandleFunc("/receipt", controller.BookingDetails)
 	fmt.Println("localhost:8000")
 	http.ListenAndServe(":8000", nil)
 }

@@ -13,11 +13,13 @@ import (
 var store = sessions.NewCookieStore([]byte("fin"))
 
 type TemplateData struct {
-	User    *model.User
-	Pets    []model.Pet
-	Pet     *model.Pet
-	Booking *model.Booking
-	Message string
+	User     *model.User
+	Pets     []model.Pet
+	Pet      *model.Pet
+	Booking  *model.Booking
+	Bookings []model.Booking
+	DayCount int
+	Message  string
 }
 
 func renderTemplate(w http.ResponseWriter, tmpl string, data *TemplateData) {
