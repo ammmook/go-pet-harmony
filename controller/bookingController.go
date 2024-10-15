@@ -77,6 +77,12 @@ func BookingRegister(w http.ResponseWriter, r *http.Request) {
 
 func BookingDetails(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session-name")
+	userEmail := session.Values["user"].(string)
+	user, err1 := managementdb.GetUserByEmail(userEmail)
+	if err1 != nil {
+		http.Error(w, err1.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	booking, ok := session.Values["booking"].(model.Booking)
 	if !ok {
@@ -86,6 +92,7 @@ func BookingDetails(w http.ResponseWriter, r *http.Request) {
 
 	dayCount, _ := session.Values["dayCount"].(int)
 	data := &TemplateData{
+		User:     user,
 		Booking:  &booking,
 		DayCount: dayCount,
 	}
