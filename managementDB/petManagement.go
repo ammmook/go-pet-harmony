@@ -11,9 +11,8 @@ func AddPets(pet model.Pet, email string) (sql.Result, error) {
 	db := initializers.OpenConnection()
 	defer db.Close()
 
-	query := "INSERT INTO Pets VALUES (?,?,?,?,?,?,?)"
+	query := "INSERT INTO Pets (name,gender,age,breed,species,user_email) VALUES (?,?,?,?,?,?)"
 	result, err := db.Exec(query,
-		pet.Id,
 		pet.Name,
 		pet.Gender,
 		pet.Age,

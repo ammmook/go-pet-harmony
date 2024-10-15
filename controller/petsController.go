@@ -27,7 +27,6 @@ func PetRegister(w http.ResponseWriter, r *http.Request) {
 		userEmail := session.Values["user"]
 
 		pet := model.Pet{
-			Id:      GenerateID(),
 			Name:    r.FormValue("pet_name"),
 			Gender:  r.FormValue("pet_gender"),
 			Age:     r.FormValue("pet_age"),
