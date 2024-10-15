@@ -18,7 +18,11 @@ func LoadListPetPage(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		renderTemplate(w, "listpet.html", pets)
+
+		data := &TemplateData{
+			Pets: pets,
+		}
+		renderTemplate(w, "listpet.html", data)
 	}
 }
 
@@ -69,7 +73,12 @@ func EditPet(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		renderTemplate(w, "editpet.html", pet)
+
+		data := &TemplateData{
+			Pet: pet,
+		}
+
+		renderTemplate(w, "editpet.html", data)
 	}
 }
 

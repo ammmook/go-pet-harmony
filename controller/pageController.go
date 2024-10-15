@@ -14,6 +14,9 @@ var store = sessions.NewCookieStore([]byte("fin"))
 
 type TemplateData struct {
 	User    *model.User
+	Pets    []model.Pet
+	Pet     *model.Pet
+	Booking *model.Booking
 	Message string
 }
 

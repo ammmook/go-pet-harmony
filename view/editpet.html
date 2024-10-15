@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="view/static/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แก้ไขข้อมูลสัตว์เลี้ยง - Pet Harmony</title>
 </head>
+
 <body>
     <div class="container">
         <h2>แก้ไขข้อมูลสัตว์เลี้ยง</h2>
         <form action="editmypet" method="post">
-            <input type="hidden" value="{{.Id}}" name="Id">
+            <input type="hidden" value="{{.Pet.Id}}" name="Id">
             <div>
                 <label for="pet_name">ชื่อสัตว์เลี้ยง:</label>
-                <input type="text" name="pet_name" maxlength="50" value="{{.Name}}" required>
+                <input type="text" name="pet_name" maxlength="50" value="{{.Pet.Name}}" required>
             </div>
 
             <div>
                 <label for="breed">ประเภทสัตว์เลี้ยง:</label>
                 <select name="breed">
-                    <option value="หมา" {{if eq .Breed "หมา"}}selected{{end}}>หมา</option>
-                    <option value="แมว" {{if eq .Breed "แมว"}}selected{{end}}>แมว</option>
-                    <option value="กิ้งก่า" {{if eq .Breed "กิ้งก่า"}}selected{{end}}>กิ้งก่า</option>
-                    <option value="กบ" {{if eq .Breed "กบ"}}selected{{end}}>กบ</option>
-                    <option value="เต่า" {{if eq .Breed "เต่า"}}selected{{end}}>เต่า</option>
-                    <option value="งู" {{if eq .Breed "งู"}}selected{{end}}>งู</option>
+                    <option value="หมา" {{if eq .Pet.Breed "หมา" }}selected{{end}}>หมา</option>
+                    <option value="แมว" {{if eq .Pet.Breed "แมว" }}selected{{end}}>แมว</option>
+                    <option value="กิ้งก่า" {{if eq .Pet.Breed "กิ้งก่า" }}selected{{end}}>กิ้งก่า</option>
+                    <option value="กบ" {{if eq .Pet.Breed "กบ" }}selected{{end}}>กบ</option>
+                    <option value="เต่า" {{if eq .Pet.Breed "เต่า" }}selected{{end}}>เต่า</option>
+                    <option value="งู" {{if eq .Pet.Breed "งู" }}selected{{end}}>งู</option>
+
                 </select>
             </div>
 
             <div>
                 <label for="species">สายพันธุ์สัตว์เลี้ยง:</label>
-                <input type="text" name="species" maxlength="100" value="{{.Species}}" required>
+                <input type="text" name="species" maxlength="100" value="{{.Pet.Species}}" required>
             </div>
 
             <div>
                 <label>เพศสัตว์เลี้ยง:</label>
                 <div>
                     <label class="radio-label">
-                        <input type="radio" name="pet_gender" value="เพศผู้" {{if eq .Gender "เพศผู้"}}checked{{end}} required>
+                        <input type="radio" name="pet_gender" value="เพศผู้" {{if eq .Pet.Gender "เพศผู้"
+                            }}checked{{end}} required>
                         <span>เพศผู้</span>
-                        </label>
+                    </label>
                     <label class="radio-label">
-                        <input type="radio" name="pet_gender" value="เพศเมีย" {{if eq .Gender "เพศเมีย"}}checked{{end}}>
+                        <input type="radio" name="pet_gender" value="เพศเมีย" {{if eq .Pet.Gender "เพศเมีย"
+                            }}checked{{end}}>
                         <span>เพศเมีย</span>
                     </label>
                     <label class="radio-label">
-                        <input type="radio" name="pet_gender" value="ไม่ทราบ" {{if eq .Gender "ไม่ทราบ"}}checked{{end}}>
+                        <input type="radio" name="pet_gender" value="ไม่ทราบ" {{if eq .Pet.Gender "ไม่ทราบ"
+                            }}checked{{end}}>
                         <span>ไม่ทราบ</span>
                     </label>
                 </div>
@@ -53,7 +59,8 @@
 
             <div>
                 <label for="pet_age">อายุ:</label>
-                <input type="text" name="pet_age" placeholder="ระบุเป็นปี/เดือน" maxlength="50" value="{{.Age}}" required>
+                <input type="text" name="pet_age" placeholder="ระบุเป็นปี/เดือน" maxlength="50" value="{{.Pet.Age}}"
+                    required>
             </div>
 
             <div>
@@ -66,4 +73,5 @@
         </form>
     </div>
 </body>
+
 </html>
