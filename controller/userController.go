@@ -9,7 +9,10 @@ import (
 
 	managementdb "github.com/f1nn-ach/pj-golang/managementDB"
 	"github.com/f1nn-ach/pj-golang/model"
+	"github.com/gorilla/sessions"
 )
+
+var store = sessions.NewCookieStore([]byte("secret-key"))
 
 type Messege map[string]string
 
@@ -72,6 +75,20 @@ func UserLogin(w http.ResponseWriter, r *http.Request) {
 			}
 			tmpl.Execute(w, mess)
 		} else {
+			session, err_s := store.Get(r, "session-name")
+			if err_s != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+			session.Values["authenticated"] = true
+			session.Values["user"] = *user
+
+			err_s = session.Save(r, w)
+			if err_s != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+
 			tmpl, err := template.ParseFiles("view/result.html")
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
