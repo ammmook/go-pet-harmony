@@ -12,15 +12,12 @@ func main() {
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("view/assets"))))
 	http.Handle("/js/", http.StripPrefix("/js/", http.FileServer(http.Dir("view/javascript"))))
 
+	http.HandleFunc("/", controller.IndexPage)            // Index page
+	http.HandleFunc("/login", controller.UserLogin)       // User login
+	http.HandleFunc("/register", controller.UserRegister) // User registration (assuming UserRegister is implemented)
+	http.HandleFunc("/result", controller.GetResultPage)  // Result page after login
+	http.HandleFunc("/logout", controller.UserLogout)     // User logout
 	http.HandleFunc("/getUser", controller.CallUser)
-	http.HandleFunc("/", controller.GetIndexPage)
-
-	http.HandleFunc("/login", controller.UserLogin)
-	http.HandleFunc("/register", controller.UserRegister)
-
-	http.HandleFunc("/result", controller.GetResultPage)
-
-	http.HandleFunc("/logout", controller.Logout)
 
 	http.HandleFunc("/petregister", controller.PetRegister)
 	http.HandleFunc("/listpets", controller.LoadListPetPage)
