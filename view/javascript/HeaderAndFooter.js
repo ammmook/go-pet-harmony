@@ -11,5 +11,8 @@ class SpecialFooter extends HTMLElement {
     }
 }
 
-customElements.define('special-header', SpecialHeader);
 customElements.define('special-footer', SpecialFooter);
+
+function toggleDropdown() {
+    document.getElementById("userDropdown").classList.toggle("show");
+}
