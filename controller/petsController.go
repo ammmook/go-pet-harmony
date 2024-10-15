@@ -13,6 +13,11 @@ func LoadListPetPage(w http.ResponseWriter, r *http.Request) {
 		session, _ := store.Get(r, "session-name")
 		userEmail, _ := session.Values["user"].(string)
 
+		user, err1 := managementdb.GetUserByEmail(userEmail)
+		if err1 != nil {
+			http.Error(w, err1.Error(), http.StatusInternalServerError)
+			return
+		}
 		pets, err := managementdb.GetPetsByEmail(userEmail)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -20,6 +25,7 @@ func LoadListPetPage(w http.ResponseWriter, r *http.Request) {
 		}
 
 		data := &TemplateData{
+			User: user,
 			Pets: pets,
 		}
 		renderTemplate(w, "listpet.html", data)
@@ -63,6 +69,15 @@ func EditPet(w http.ResponseWriter, r *http.Request) {
 		managementdb.EditPets(pet)
 		http.Redirect(w, r, "/listpets", http.StatusSeeOther)
 	} else if r.Method == http.MethodGet {
+		session, _ := store.Get(r, "session-name")
+		userEmail, _ := session.Values["user"].(string)
+
+		user, err1 := managementdb.GetUserByEmail(userEmail)
+		if err1 != nil {
+			http.Error(w, err1.Error(), http.StatusInternalServerError)
+			return
+		}
+
 		id, err := strconv.Atoi(r.FormValue("id"))
 		if err != nil {
 			http.Error(w, "Invalid pet id", http.StatusBadRequest)
@@ -75,7 +90,8 @@ func EditPet(w http.ResponseWriter, r *http.Request) {
 		}
 
 		data := &TemplateData{
-			Pet: pet,
+			User: user,
+			Pet:  pet,
 		}
 
 		renderTemplate(w, "editpet.html", data)
