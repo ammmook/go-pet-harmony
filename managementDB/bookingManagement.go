@@ -11,7 +11,7 @@ import (
 func AddBooking(book model.Booking, pet_id int) (sql.Result, error) {
 	db := initializers.OpenConnection()
 
-	query := "INSERT INTO Bookings (start_date, end_date, request, pet_id) VALUES (?,?,?,?)"
+	query := "INSERT INTO Bookings (start_date, end_date, requests, pet_id) VALUES (?,?,?,?)"
 	result, err := db.Exec(query,
 		book.StartDate,
 		book.EndDate,
