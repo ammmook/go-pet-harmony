@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"encoding/gob"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -9,6 +10,10 @@ import (
 	managementdb "github.com/f1nn-ach/pj-golang/managementDB"
 	"github.com/f1nn-ach/pj-golang/model"
 )
+
+func init() {
+	gob.Register(model.Booking{})
+}
 
 func BookingRegister(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
@@ -30,7 +35,8 @@ func BookingRegister(w http.ResponseWriter, r *http.Request) {
 			EndDate:   endDateTimeStr,
 			Request:   r.FormValue("requests"),
 		}
-		_, err_regis := managementdb.AddBooking(booking, pet_id)
+		insertedID, err_regis := managementdb.AddBooking(booking, pet_id)
+		booking.Id = int(insertedID)
 		if err_regis != nil {
 			http.Error(w, err_regis.Error(), http.StatusBadRequest)
 			return
