@@ -7,6 +7,6 @@ import (
 )
 
 func OpenConnection() *sql.DB {
-	db, _ := sql.Open("mysql", "golang:1234@tcp(127.0.0.1:33091)/pj_golang")
+	db, _ := sql.Open("mysql", "root:1234@tcp(127.0.0.1:3306)/pj_golang")
 	return db
 }
