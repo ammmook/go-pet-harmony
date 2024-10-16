@@ -3,7 +3,7 @@ class SpecialFooter extends HTMLElement {
         this.innerHTML = `
             <footer>
                 <link rel="stylesheet" href="static/style_footer.css?v=1.0">
-                <div class="container">
+                <div class="footer-container">
                     <p>&copy; 2024 Pet Harmony. สงวนลิขสิทธิ์</p>
                 </div>
             </footer>

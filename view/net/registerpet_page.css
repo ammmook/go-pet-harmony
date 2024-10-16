@@ -4,36 +4,49 @@
     --text-color: #333;
     --background-color: #f9f9f9;
     --accent-color: #e74c3c;
-    --border-color: #e0e0e0;
+    --input-border-color: #ddd;
 }
 
-* {
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Prompt', sans-serif;
+    font-family: 'Prompt', 'Kanit', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
+    flex: 1;
+    display: flex;
+    margin-top: 60px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    
+}
+
+.registration-form {
+    width: 100%;
     max-width: 600px;
-    margin: 0 auto;
     background-color: white;
-    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
 }
 
 h2 {
-    text-align: center;
+    font-size: 28px;
     color: var(--primary-color);
     margin-bottom: 30px;
+    text-align: center;
 }
 
 form div {
@@ -50,23 +63,17 @@ input[type="text"],
 select {
     width: 100%;
     padding: 10px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--input-border-color);
     border-radius: 4px;
     font-size: 16px;
 }
 
-input[type="text"]:focus,
-select:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
-}
-
 select {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M8 12L2 6h12z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
+    background-size: 12px;
 }
 
 .radio-label {
@@ -81,11 +88,13 @@ select {
 }
 
 .btn {
+    display: inline-block;
     padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
     font-size: 16px;
     font-weight: 500;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -109,8 +118,7 @@ select {
 }
 
 .link-pets {
-    display: block;
-    text-align: center;
+    display: inline-block;
     margin-top: 20px;
     color: var(--primary-color);
     text-decoration: none;
@@ -121,22 +129,17 @@ select {
     text-decoration: underline;
 }
 
-@media (max-width: 480px) {
-    .container {
+@media (max-width: 768px) {
+    .registration-form {
         padding: 20px;
     }
 
-    .radio-label {
-        display: block;
+    h2 {
+        font-size: 24px;
+    }
+
+    .btn {
+        width: 100%;
         margin-bottom: 10px;
     }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.container {
-    animation: fadeIn 0.5s ease-in-out;
 }
