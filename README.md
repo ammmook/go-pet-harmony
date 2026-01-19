@@ -2,7 +2,7 @@
 
 <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnZnb3JqdmZrbWRsM3R5ejI4Zzkwc2cwcmo5MnBibXhvZ3VvaWh6dSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/4UkX1kD5cl9M4/giphy.gif" width="200" height="auto"/>
 
-# 🐶🐱 Pet Hotel Booking System
+# 🐶🐱 Pet Hotel Booking
 ### *My First Journey into Go (Golang)*
 
 ![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)
